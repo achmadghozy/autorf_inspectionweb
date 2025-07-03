@@ -13,6 +13,10 @@ import {
   FaPeopleArrows,
 } from "react-icons/fa";
 import CompTextPoint from "../components/CompTextPoint";
+import CompCarThumbnail from "../components/CompCarThumbnail";
+import brio from "/pngwing_brio.png";
+import rush from "/pngwing_rush.png";
+import alphard from "/pngwing_alphard.png";
 
 interface ProfileIF {}
 
@@ -54,17 +58,11 @@ function Services() {
     <section
       id="Services"
       className="min-h-[60vh] flex flex-col justify-center items-center bg-teal-100 py-20 px-4 border-b border-blue-100 text-center"
-      style={{
-        background: `url(${illus1}) no-repeat center center`,
-        backgroundSize: "cover",
-      }}
     >
       <h3 className="text-2xl md:text-3xl font-semibold mb-3 text-teal-800 bg-white opacity-80 rounded-lg p-4">
         {Strings.SECTION_1_HEADING}
       </h3>
-      <p className="text-base md:text-lg text-blue-900 max-w-2xl whitespace-pre-line bg-white opacity-80 rounded-lg p-4">
-        {Strings.SECTION_1_DESC}
-      </p>
+
       <div className="w-full max-w-3xl mx-auto mt-8 p-6 rounded-2xl border border-blue-200 bg-white/60 backdrop-blur-sm shadow flex flex-wrap justify-center gap-4">
         {points.map((point, idx) => (
           <div key={idx} className="flex-1 min-w-[180px] max-w-[220px]">
@@ -81,10 +79,6 @@ function Advertisment() {
     <section
       id="Advertisment"
       className="min-h-[60vh] flex flex-col justify-center items-center bg-blue-50 py-20 px-4 border-b border-blue-100 text-center"
-      style={{
-        background: `url(${illus2}) no-repeat center center`,
-        backgroundSize: "cover",
-      }}
     >
       <h3 className="text-2xl md:text-3xl font-semibold mb-3 text-teal-700 bg-white opacity-80 rounded-lg p-4">
         {Strings.SECTION_3_HEADING}
@@ -100,18 +94,53 @@ function Pricing() {
   return (
     <section
       id="Pricing"
-      className="min-h-[60vh] flex flex-col justify-center items-center bg-white py-20 px-4 border-b border-blue-100 text-center"
-      style={{
-        background: `url(${illus3}) no-repeat center center`,
-        backgroundSize: "cover",
-      }}
+      className="min-h-[60vh] flex flex-col justify-center items-center bg-white/30 py-20 px-4 border-b border-blue-100 text-center"
     >
       <h3 className="text-2xl md:text-3xl font-semibold mb-3 text-blue-900 bg-white opacity-80 rounded-lg p-4">
         {Strings.SECTION_3_HEADING}
       </h3>
-      <p className="text-base md:text-lg text-teal-900 max-w-2xl whitespace-pre-line bg-white opacity-80 rounded-lg p-4">
-        {Strings.SECTION_3_DESC}
-      </p>
+      <div className="flex flex-row gap-4">
+        <CompCarThumbnail
+          image={brio}
+          text1={"Small Car"}
+          text2={"Brio"}
+          text3={"Calya"}
+          text4={"Mazda2"}
+          text5={"dll"}
+          harga={"Rp. 350.000"}
+        />
+        <CompCarThumbnail
+          image={rush}
+          text1={"Medium Car"}
+          text2={"Rush"}
+          text3={"Avanza"}
+          text4={"Innova"}
+          text5={"dll"}
+          harga={"Rp. 400.000"}
+        />
+        <CompCarThumbnail
+          image={alphard}
+          text1={"Luxury Car"}
+          text2={"Alphard"}
+          text3={"Vellfire"}
+          text4={"Fortuner"}
+          text5={"dll"}
+          harga={"Rp. 500.000"}
+        />
+      </div>
+      <div className="flex justify-center pt-5">
+        <div className="relative w-full max-w-2xl bg-gradient-to-br from-blue-700 via-teal-400 to-blue-300 rounded-2xl shadow-lg p-1">
+          {/* Accent bar for promotion */}
+
+          <p className="relative text-base md:text-lg font-bold text-white whitespace-pre-line bg-white/20 backdrop-blur-md rounded-2xl p-6 pl-8 shadow-inner">
+            {Strings.SECTION_3_DESC}
+          </p>
+          {/* Promotion badge */}
+          <span className="absolute -top-1 -right-1 bg-yellow-400 text-blue-900 font-semibold px-3 py-1 rounded-full shadow-md text-xs md:text-sm animate-ping">
+            PROMO
+          </span>
+        </div>
+      </div>
     </section>
   );
 }
@@ -149,7 +178,7 @@ function OrderProcess() {
       <h3 className="text-2xl md:text-3xl font-semibold mb-3 text-teal-700">
         {Strings.SECTION_ORDER_PROCESS_HEADING}
       </h3>
-      <div className="flex flex-row gap-4 mb-4 mt-4">
+      <div className="grid grid-cols-3 md:grid-cols-5 gap-4 mb-4 mt-4">
         <CompTextBox text1={Strings.ORDER_PROCESS_1} Icon={FaWhatsappSquare} />
         <CompTextBox text1={Strings.ORDER_PROCESS_2} Icon={FaCalendarCheck} />
         <CompTextBox
@@ -203,10 +232,10 @@ const SecProfile: React.FC<ProfileIF> = ({}) => {
     <div className="w-full">
       {Introduction()}
       {Services()}
-      {Advertisment()}
-      {Pricing()}
-      {Testimonials()}
       {OrderProcess()}
+      {Pricing()}
+      {Advertisment()}
+      {Testimonials()}
       {Contact()}
     </div>
   );

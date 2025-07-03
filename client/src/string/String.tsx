@@ -17,8 +17,7 @@ export default {
   SECTION_1_POINT_7: "Legalitas",
 
   SECTION_3_HEADING: "Harga Terjangkau, Kualitas Profesional",
-  SECTION_3_DESC:
-    "Lebih hemat dari bengkel — tanpa kompromi.\nHarga kami 20–30% di bawah pasar. Dikerjakan oleh teknisi berpengalaman & tersertifikasi.\nPromo: Gratis scan ECU senilai Rp250.000 bulan ini!",
+  SECTION_3_DESC: "DAPATKAN DISKON KHUSUS UNTUK INSPEKSI LEBIH DARI 2 MOBIL",
 
   SECTION_4_HEADING: "Testimoni Pelanggan Kami",
   SECTION_4_DESC: "Ratusan pembeli puas — kini giliran Anda.",

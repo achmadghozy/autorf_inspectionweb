@@ -34,20 +34,22 @@ const CompTextBox: React.FC<CompTextBoxProps> = ({
         </div>
       )}
       {/* Text Content */}
-      <div className="flex flex-col gap-1 w-full justify-center items-center mt-4">
-        <span className="text-blue-900 text-xl md:text-2xl font-extrabold tracking-tight z-10 text-center">
+      <div className="flex flex-col gap-1 w-full justify-start items-start mt-4">
+        <span className="text-blue-900 text-xl md:text-2xl font-extrabold tracking-tight z-10 text-start justify-start">
           {text1}
         </span>
-        {text2 && (
-          <span className="text-blue-700 text-base md:text-lg font-light z-10 text-center opacity-80">
-            {text2}
-          </span>
-        )}
-        {text3 && (
-          <span className="text-blue-600 text-base md:text-lg font-light z-10 text-center opacity-80">
-            {text3}
-          </span>
-        )}
+        <div className="hidden md:block">
+          {text2 && (
+            <span className="text-blue-700 text-base md:text-lg font-light z-10 text-start justify-start opacity-80">
+              {text2}
+            </span>
+          )}
+          {text3 && (
+            <span className="text-blue-600 text-base md:text-lg font-light z-10 text-start justify-start opacity-80">
+              {text3}
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );
