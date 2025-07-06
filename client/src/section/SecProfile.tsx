@@ -1,9 +1,6 @@
 import Strings from "../string/String";
 import { ReactGoogleReviews } from "react-google-reviews";
 import "react-google-reviews/dist/index.css";
-import illus1 from "/illus1.svg";
-import illus2 from "/illus2.svg";
-import illus3 from "/illus3.svg";
 import CompTextBox from "../components/CompTextBox";
 import {
   FaWhatsappSquare,
@@ -17,6 +14,8 @@ import CompCarThumbnail from "../components/CompCarThumbnail";
 import brio from "/pngwing_brio.png";
 import rush from "/pngwing_rush.png";
 import alphard from "/pngwing_alphard.png";
+import { ReactElement } from "react";
+import React, { useState } from "react";
 
 interface ProfileIF {}
 
@@ -74,17 +73,151 @@ function Services() {
   );
 }
 
-function Advertisment() {
+function BookForms() {
+  const [username, setUsername] = useState("");
+  const [carModel, setCarModel] = useState("");
+  const [year, setYear] = useState("");
+  const [location, setLocation] = useState("");
+  const [inspectionDate, setInspectionDate] = useState("");
+  const [inspectionTime, setInspectionTime] = useState("");
+  const [notes, setNotes] = useState("");
+
+  const handleBookNow = (e: React.FormEvent) => {
+    e.preventDefault();
+    const message =
+      `Halo, saya ingin booking inspeksi mobil.\n` +
+      `Nama: ${username}\n` +
+      `Mobil: ${carModel}\n` +
+      `Tahun: ${year}\n` +
+      `Lokasi: ${location}\n` +
+      `Tanggal: ${inspectionDate}\n` +
+      `Waktu: ${inspectionTime}\n` +
+      `Catatan: ${notes}`;
+    const encodedMessage = encodeURIComponent(message);
+    const waUrl = `https://wa.me/6281234567890?text=${encodedMessage}`;
+    window.open(waUrl, "_blank");
+  };
+
   return (
     <section
       id="Advertisment"
       className="min-h-[60vh] flex flex-col justify-center items-center bg-blue-50 py-20 px-4 border-b border-blue-100 text-center"
     >
       <h3 className="text-2xl md:text-3xl font-semibold mb-3 text-teal-700 bg-white opacity-80 rounded-lg p-4">
-        {Strings.SECTION_3_HEADING}
+        {Strings.SECTION_5_HEADING}
       </h3>
-      <p className="text-base md:text-lg text-blue-900 max-w-2xl whitespace-pre-line bg-white opacity-80 rounded-lg p-4">
-        {Strings.SECTION_3_DESC}
+      <form
+        className="w-full max-w-md mx-auto mt-8 p-8 rounded-3xl border border-blue-200 bg-white/80 backdrop-blur-md shadow-xl flex flex-col items-stretch gap-6"
+        onSubmit={handleBookNow}
+      >
+        {/* Forms */}
+        <span className="text-lg font-semibold text-blue-900 text-left mb-2">
+          {Strings.SECTION_5_FORMS_HEADER}
+        </span>
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1">
+            <label
+              htmlFor="username"
+              className="text-sm font-semibold text-gray-800 text-left"
+            >
+              Nama Lengkap Pemesan:
+            </label>
+            <input
+              id="username"
+              name="username"
+              type="text"
+              placeholder="Prabowo Subianto"
+              className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-semibold text-gray-800 text-left">
+              Detail Inspeksi
+            </label>
+            <div className="flex flex-col md:flex-row gap-3">
+              <input
+                id="carmodel"
+                name="carmodel"
+                type="text"
+                placeholder="Nama Mobil (cth: Toyota Yaris)"
+                className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
+                value={carModel}
+                onChange={(e) => setCarModel(e.target.value)}
+              />
+              <input
+                id="year"
+                name="year"
+                type="text"
+                placeholder="Tahun Pembuatan"
+                className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+              />
+              <input
+                id="location"
+                name="location"
+                type="text"
+                placeholder="Lokasi Inspeksi (Kecamatan, Kota/Kab)"
+                className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-semibold text-gray-800 text-left">
+              Tanggal & Waktu Inspeksi
+            </label>
+            <div className="flex flex-col md:flex-row gap-3">
+              <input
+                id="inspection-date"
+                name="inspection-date"
+                type="date"
+                className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
+                placeholder="Pilih tanggal"
+                value={inspectionDate}
+                onChange={(e) => setInspectionDate(e.target.value)}
+              />
+              <input
+                id="inspection-time"
+                name="inspection-time"
+                type="time"
+                className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
+                placeholder="Pilih waktu"
+                value={inspectionTime}
+                onChange={(e) => setInspectionTime(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-1">
+            <label
+              htmlFor="notes"
+              className="text-sm font-semibold text-gray-800 text-left"
+            >
+              Catatan Khusus:
+            </label>
+            <input
+              id="notes"
+              name="notes"
+              type="text"
+              placeholder="Minus, Kondisi, dll"
+              className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+            />
+          </div>
+        </div>
+        <button
+          type="submit"
+          className="mt-4 w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 rounded-xl shadow-lg transition text-lg tracking-wide"
+        >
+          Booking Sekarang
+        </button>
+      </form>
+      <p className="text-base md:text-lg font-light text-blue-900 max-w-2xl whitespace-pre-line bg-white opacity-80 rounded-lg p-4 mt-4">
+        {Strings.SECTION_5_DESC}
       </p>
     </section>
   );
@@ -99,31 +232,31 @@ function Pricing() {
       <h3 className="text-2xl md:text-3xl font-semibold mb-3 text-blue-900 bg-white opacity-80 rounded-lg p-4">
         {Strings.SECTION_3_HEADING}
       </h3>
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-row justify-evenly mb-4 mt-4 gap-4">
         <CompCarThumbnail
           image={brio}
-          text1={"Small Car"}
-          text2={"Brio"}
-          text3={"Calya"}
-          text4={"Mazda2"}
+          text1={Strings.SMALL_CAR}
+          text2={Strings.SMALL_CAR_1}
+          text3={Strings.SMALL_CAR_2}
+          text4={Strings.SMALL_CAR_3}
           text5={"dll"}
           harga={"Rp. 350.000"}
         />
         <CompCarThumbnail
           image={rush}
-          text1={"Medium Car"}
-          text2={"Rush"}
-          text3={"Avanza"}
-          text4={"Innova"}
+          text1={Strings.MEDIUM_CAR}
+          text2={Strings.MEDIUM_CAR_1}
+          text3={Strings.MEDIUM_CAR_2}
+          text4={Strings.MEDIUM_CAR_3}
           text5={"dll"}
           harga={"Rp. 400.000"}
         />
         <CompCarThumbnail
           image={alphard}
-          text1={"Luxury Car"}
-          text2={"Alphard"}
-          text3={"Vellfire"}
-          text4={"Fortuner"}
+          text1={Strings.PREMIUM_CAR}
+          text2={Strings.PREMIUM_CAR_1}
+          text3={Strings.PREMIUM_CAR_2}
+          text4={Strings.PREMIUM_CAR_3}
           text5={"dll"}
           harga={"Rp. 500.000"}
         />
@@ -170,6 +303,36 @@ function Testimonials() {
 }
 
 function OrderProcess() {
+  /*   interface ProcessProp {
+    text1: string;
+    text2?: string | null;
+    text3?: string | null;
+    icon?: React.ComponentType<{ className?: string }> | null;
+    image?: string | null;
+  }
+
+  const ContactUS: ProcessProp[] = {
+    text1: Strings.ORDER_PROCESS_1,
+    icon: FaWhatsappSquare,
+  };
+  const BookanSched = {
+    text1: Strings.ORDER_PROCESS_2,
+    icon: FaCalendarCheck,
+  };
+  const InspectnReport = {
+    text1: Strings.ORDER_PROCESS_3,
+    text2: Strings.ORDER_PROCESS_3_SUB,
+    text3: Strings.ORDER_PROCESS_4_SUB1,
+    icon: FaFileAlt,
+  };
+  const Consultation = {
+    text1: Strings.ORDER_PROCESS_5,
+    text2: Strings.ORDER_PROCESS_5_SUB,
+    icon: FaPeopleArrows,
+  };
+
+  const lsOrderProce: ProcessProp[] = [];
+ */
   return (
     <section
       id="OrderProcess"
@@ -178,16 +341,11 @@ function OrderProcess() {
       <h3 className="text-2xl md:text-3xl font-semibold mb-3 text-teal-700">
         {Strings.SECTION_ORDER_PROCESS_HEADING}
       </h3>
-      <div className="grid grid-cols-3 md:grid-cols-5 gap-4 mb-4 mt-4">
+      <div className="flex flex-wrap justify-evenly gap-2 md:gap-4 mb-4 mt-4">
         <CompTextBox text1={Strings.ORDER_PROCESS_1} Icon={FaWhatsappSquare} />
         <CompTextBox text1={Strings.ORDER_PROCESS_2} Icon={FaCalendarCheck} />
         <CompTextBox
           text1={Strings.ORDER_PROCESS_3}
-          text2={Strings.ORDER_PROCESS_3_SUB}
-          Icon={FaCarAlt}
-        />
-        <CompTextBox
-          text1={Strings.ORDER_PROCESS_4}
           text2={Strings.ORDER_PROCESS_4_SUB1}
           text3={Strings.ORDER_PROCESS_4_SUB2}
           Icon={FaFileAlt}
@@ -234,7 +392,7 @@ const SecProfile: React.FC<ProfileIF> = ({}) => {
       {Services()}
       {OrderProcess()}
       {Pricing()}
-      {Advertisment()}
+      {BookForms()}
       {Testimonials()}
       {Contact()}
     </div>

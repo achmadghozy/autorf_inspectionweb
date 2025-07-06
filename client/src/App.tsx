@@ -51,9 +51,9 @@ function App() {
   return (
     <div className="w-screen">
       {GetHeader(Menu)}
-      <div className="flex w-full top-0 right-0">
+      <div className="flex w-full">
         <div className="h-full w-screen bg-white">{GetPageAvailable(Menu)}</div>
-        <div className="w-[10px]h-full absolute top-0 right-[0px]">
+        <div className="hidden md:block">
           <CompProgressBar />
         </div>
       </div>

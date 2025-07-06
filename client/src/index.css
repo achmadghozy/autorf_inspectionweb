@@ -73,8 +73,9 @@ button:focus-visible {
 }
 
 @keyframes ping {
-  75%, 100% {
+  75%, 100%{
     transform: scale(1.5);
     opacity: 1;
+
   }
 }

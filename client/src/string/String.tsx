@@ -1,3 +1,5 @@
+import { TbPremiumRights } from "react-icons/tb";
+
 export default {
   ABOUT_HEADING: "AutoRF Inspection",
   ABOUT_HEADING_SUB:
@@ -22,7 +24,8 @@ export default {
   SECTION_4_HEADING: "Testimoni Pelanggan Kami",
   SECTION_4_DESC: "Ratusan pembeli puas — kini giliran Anda.",
 
-  SECTION_5_HEADING: "Hubungi Kami",
+  SECTION_5_HEADING: "Hubungi Kami Segera",
+  SECTION_5_FORMS_HEADER: "Sebelum booking, isi data-data berikut:",
   SECTION_5_DESC:
     "Kami membantu Anda memilih mobil bekas yang tepat dengan inspeksi menyeluruh dan harga terjangkau. Kami adalah solusi terpercaya untuk Anda yang ingin membeli mobil bekas dengan kepercayaan dan kualitas terbaik.",
 
@@ -30,8 +33,8 @@ export default {
   SECTION_ORDER_PROCESS_DESC: "Proses cepat, mudah,dan tidak berbelit-belit",
 
   ORDER_PROCESS_1: "BERITAHU KAMI",
-  ORDER_PROCESS_2: "BOOKING DAN PENJADWALAN",
-  ORDER_PROCESS_3: "PROSES INSPEKSI",
+  ORDER_PROCESS_2: "BOOKING & PENJADWALAN",
+  ORDER_PROCESS_3: "INSPEKSI & LAPORAN",
   ORDER_PROCESS_3_SUB: "Pantau secara realtime",
   ORDER_PROCESS_4: "LAPORAN INSPEKSI",
   ORDER_PROCESS_4_SUB1: "Rangkuman(<30 Menit)",
@@ -39,4 +42,17 @@ export default {
   ORDER_PROCESS_5: "KONSULTASI",
   ORDER_PROCESS_5_SUB:
     "Ketahui lebih detil hasil inspeksi dengan inspektor senior kami",
+
+  SMALL_CAR: "Small Car",
+  SMALL_CAR_1: "Brio",
+  SMALL_CAR_2: "Calya",
+  SMALL_CAR_3: "Jazz",
+  MEDIUM_CAR: "Medium Car",
+  MEDIUM_CAR_1: "Rush",
+  MEDIUM_CAR_2: "Innova",
+  MEDIUM_CAR_3: "Xpander",
+  PREMIUM_CAR: "Premium Car",
+  PREMIUM_CAR_1: "Alphard",
+  PREMIUM_CAR_2: "Fortuner",
+  PREMIUM_CAR_3: "Palisade",
 };

@@ -20,15 +20,15 @@ const CompCarThumbnail: React.FC<CompCarThumbnailProps> = ({
   harga,
 }) => {
   return (
-    <div className="w-full max-w-6xl bg-gradient-to-br from-teal-200 via-blue-300 to-blue-500 border rounded-2xl shadow-md p-6 flex flex-col gap-4">
+    <div className="flex flex-col w-full min-w-[125px] max-w-6xl bg-gradient-to-br from-teal-200 via-blue-300 to-blue-500 border rounded-2xl shadow-md p-2 md:p-6 md:gap-4">
       {/* Title */}
-      <span className="text-blue-900 text-xl md:text-3xl font-extrabold leading-tight mb-2 text-center">
+      <span className="text-blue-900 text-l md:text-3xl font-extrabold leading-tight mb-2 text-center">
         {text1}
       </span>
       {/* Content: 2 columns */}
       <div className="flex flex-row gap-2 items-start">
         {/* Image */}
-        <div className="flex-shrink-0 max-w-32">
+        <div className="hidden md:block flex-shrink-0 max-w-32">
           <img
             src={image}
             alt="Car Thumbnail"
@@ -51,7 +51,7 @@ const CompCarThumbnail: React.FC<CompCarThumbnailProps> = ({
           </ul>
         </div>
       </div>
-      <span className="inline-block px-4 py-1 rounded-full bg-transparent text-white text-lg font-bold shadow border border-blue-200 backdrop-blur-sm w-fit text-center">
+      <span className="inline-block px-4 py-1 rounded-full bg-transparent text-white  text-l md:text-lg font-bold shadow border border-blue-200 backdrop-blur-sm w-fit text-center">
         {harga}
       </span>
     </div>
