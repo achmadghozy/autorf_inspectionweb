@@ -8,13 +8,18 @@ import {
   FaCarAlt,
   FaFileAlt,
   FaPeopleArrows,
+  FaBolt,
+  FaCogs,
+  FaStream,
+  FaWrench,
+  FaCarSide,
+  FaStamp,
 } from "react-icons/fa";
 import CompTextPoint from "../components/CompTextPoint";
 import CompCarThumbnail from "../components/CompCarThumbnail";
 import brio from "/pngwing_brio.png";
 import rush from "/pngwing_rush.png";
 import alphard from "/pngwing_alphard.png";
-import { ReactElement } from "react";
 import React, { useState } from "react";
 
 interface ProfileIF {}
@@ -52,6 +57,16 @@ function Services() {
     Strings.SECTION_1_POINT_6,
     Strings.SECTION_1_POINT_7,
   ];
+  // List of icons for each point
+  const icons = [
+    FaCarAlt, // Mesin
+    FaCogs, // Transimisi
+    FaStream, // Rangka/Chasis
+    FaWrench, // Kaki-kaki
+    FaCarSide, // Body
+    FaBolt, // Kelistrikan dan Fitur
+    FaStamp, // Legalitas
+  ];
 
   return (
     <section
@@ -63,11 +78,14 @@ function Services() {
       </h3>
 
       <div className="w-full max-w-3xl mx-auto mt-8 p-6 rounded-2xl border border-blue-200 bg-white/60 backdrop-blur-sm shadow flex flex-wrap justify-center gap-4">
-        {points.map((point, idx) => (
-          <div key={idx} className="flex-1 min-w-[180px] max-w-[220px]">
-            <CompTextPoint text={point} />
-          </div>
-        ))}
+        {points.map((point, idx) => {
+          const Icon = icons[idx] || FaCarAlt;
+          return (
+            <div key={idx} className="flex-1 min-w-[180px] max-w-[220px]">
+              <CompTextPoint text={point} icon={<Icon />} />
+            </div>
+          );
+        })}
       </div>
     </section>
   );
@@ -75,21 +93,41 @@ function Services() {
 
 function BookForms() {
   const [username, setUsername] = useState("");
-  const [carModel, setCarModel] = useState("");
-  const [year, setYear] = useState("");
-  const [location, setLocation] = useState("");
+  const [cars, setCars] = useState([{ carModel: "", year: "", location: "" }]);
   const [inspectionDate, setInspectionDate] = useState("");
   const [inspectionTime, setInspectionTime] = useState("");
   const [notes, setNotes] = useState("");
 
+  const handleCarChange = (idx: number, field: string, value: string) => {
+    setCars((prev) => {
+      const updated = [...prev];
+      updated[idx] = { ...updated[idx], [field]: value };
+      return updated;
+    });
+  };
+
+  const handleAddCar = () => {
+    setCars((prev) => [...prev, { carModel: "", year: "", location: "" }]);
+  };
+
+  const handleRemoveCar = (idx: number) => {
+    setCars((prev) => prev.filter((_, i) => i !== idx));
+  };
+
   const handleBookNow = (e: React.FormEvent) => {
     e.preventDefault();
+    let carsMsg = cars
+      .map(
+        (car, i) =>
+          `Mobil #${i + 1}: ${car.carModel}\nTahun: ${car.year}\nLokasi: ${
+            car.location
+          }`
+      )
+      .join("\n\n");
     const message =
       `Halo, saya ingin booking inspeksi mobil.\n` +
       `Nama: ${username}\n` +
-      `Mobil: ${carModel}\n` +
-      `Tahun: ${year}\n` +
-      `Lokasi: ${location}\n` +
+      `${carsMsg}\n` +
       `Tanggal: ${inspectionDate}\n` +
       `Waktu: ${inspectionTime}\n` +
       `Catatan: ${notes}`;
@@ -107,7 +145,7 @@ function BookForms() {
         {Strings.SECTION_5_HEADING}
       </h3>
       <form
-        className="w-full max-w-md mx-auto mt-8 p-8 rounded-3xl border border-blue-200 bg-white/80 backdrop-blur-md shadow-xl flex flex-col items-stretch gap-6"
+        className="w-full max-w-[600px] mx-auto mt-8 p-5 rounded-3xl border border-blue-200 bg-white/80 backdrop-blur-md shadow-xl flex flex-col items-stretch gap-6"
         onSubmit={handleBookNow}
       >
         {/* Forms */}
@@ -127,44 +165,91 @@ function BookForms() {
               name="username"
               type="text"
               placeholder="Prabowo Subianto"
-              className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
+              className="block w-[200px] rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
               value={username}
+              required
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label className="text-sm font-semibold text-gray-800 text-left">
-              Detail Inspeksi
+            <label className="text-sm font-semibold text-gray-800 text-left mb-1">
+              Detail Inspeksi:
             </label>
-            <div className="flex flex-col md:flex-row gap-3">
-              <input
-                id="carmodel"
-                name="carmodel"
-                type="text"
-                placeholder="Nama Mobil (cth: Toyota Yaris)"
-                className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
-                value={carModel}
-                onChange={(e) => setCarModel(e.target.value)}
-              />
-              <input
-                id="year"
-                name="year"
-                type="text"
-                placeholder="Tahun Pembuatan"
-                className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
-              />
-              <input
-                id="location"
-                name="location"
-                type="text"
-                placeholder="Lokasi Inspeksi (Kecamatan, Kota/Kab)"
-                className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-              />
+            {/* Header row for car inputs */}
+            <div className="hidden md:flex flex-row gap-3 items-center mb-1 pl-1">
+              <span className="text-xs font-semibold text-gray-600 w-[150px] text-left">
+                Nama Mobil
+              </span>
+              <span className="text-xs font-semibold text-gray-600 w-[80px] text-left">
+                Tahun Mobil
+              </span>
+              <span className="text-xs font-semibold text-gray-600 w-[200px] text-left">
+                Alamat Mobil
+              </span>
+              <span className="w-8"></span> {/* Spacer for remove button */}
             </div>
+            {cars.map((car, idx) => (
+              <div className="flex flex-row text-center content-center justify-center items-center bg-teal-50 border border-spacing-1 border-teal-100 rounded-md">
+                <div
+                  key={idx}
+                  className="flex flex-row flex-wrap md:flex-nowrap gap-1 items-center -p-1 rounded-md"
+                >
+                  <input
+                    id={`carmodel-${idx}`}
+                    name={`carmodel-${idx}`}
+                    type="text"
+                    placeholder="Toyota Avanza"
+                    className="block w-[150px] rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
+                    value={car.carModel}
+                    required
+                    onChange={(e) =>
+                      handleCarChange(idx, "carModel", e.target.value)
+                    }
+                  />
+                  <input
+                    id={`year-${idx}`}
+                    name={`year-${idx}`}
+                    type="text"
+                    placeholder="2022"
+                    className="block w-[80px] rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
+                    value={car.year}
+                    required
+                    onChange={(e) =>
+                      handleCarChange(idx, "year", e.target.value)
+                    }
+                  />
+                  <input
+                    id={`location-${idx}`}
+                    name={`location-${idx}`}
+                    type="text"
+                    placeholder="Cawang, Jakarta Timur"
+                    className="block w-[200px] rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
+                    value={car.location}
+                    required
+                    onChange={(e) =>
+                      handleCarChange(idx, "location", e.target.value)
+                    }
+                  />
+                </div>
+                {cars.length > 1 && (
+                  <button
+                    type="button"
+                    className="flex ml-1 h-[90px] md:h-full items-center text-center align-middle justify-center  text-red-500 hover:text-red-700 font-bold text-base bg-red-200"
+                    onClick={() => handleRemoveCar(idx)}
+                    aria-label="Remove car"
+                  >
+                    ×
+                  </button>
+                )}
+              </div>
+            ))}
+            <button
+              type="button"
+              className="mt-2 w-fit bg-blue-100 hover:bg-blue-200 text-blue-700 font-semibold py-1 px-4 rounded-lg border border-blue-300 shadow-sm transition"
+              onClick={handleAddCar}
+            >
+              + Tambah Mobil
+            </button>
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-sm font-semibold text-gray-800 text-left">
@@ -178,6 +263,7 @@ function BookForms() {
                 className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
                 placeholder="Pilih tanggal"
                 value={inspectionDate}
+                required
                 onChange={(e) => setInspectionDate(e.target.value)}
               />
               <input
@@ -187,6 +273,7 @@ function BookForms() {
                 className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
                 placeholder="Pilih waktu"
                 value={inspectionTime}
+                required
                 onChange={(e) => setInspectionTime(e.target.value)}
               />
             </div>
@@ -232,7 +319,7 @@ function Pricing() {
       <h3 className="text-2xl md:text-3xl font-semibold mb-3 text-blue-900 bg-white opacity-80 rounded-lg p-4">
         {Strings.SECTION_3_HEADING}
       </h3>
-      <div className="flex flex-row justify-evenly mb-4 mt-4 gap-4">
+      <div className="flex flex-row justify-evenly mb-4 mt-4 gap-2">
         <CompCarThumbnail
           image={brio}
           text1={Strings.SMALL_CAR}
