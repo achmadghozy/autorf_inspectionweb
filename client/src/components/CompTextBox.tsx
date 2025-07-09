@@ -34,7 +34,7 @@ const CompTextBox: React.FC<CompTextBoxProps> = ({
         </div>
       )}
       {/* Text Content */}
-      <div className="flex flex-col gap-1 w-full justify-start items-start mt-1 mb-2 md:mt-4 content-start">
+      <div className="flex flex-col gap-1 w-full justify-start text-start align-middle items-start mt-1 mb-2 md:mt-4 content-start">
         <span className="text-blue-900 text-base md:text-2xl font-extrabold tracking-tight md:z-10 text-start justify-start">
           {text1}
         </span>

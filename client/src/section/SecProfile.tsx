@@ -189,17 +189,17 @@ function BookForms() {
               <span className="w-8"></span> {/* Spacer for remove button */}
             </div>
             {cars.map((car, idx) => (
-              <div className="flex flex-row text-center content-center justify-center items-center bg-teal-50 border border-spacing-1 border-teal-100 rounded-md">
+              <div className="flex flex-row text-center content-center justify-start items-center bg-teal-50 border border-spacing-1 border-teal-100 rounded-md w-full">
                 <div
                   key={idx}
-                  className="flex flex-row flex-wrap md:flex-nowrap gap-1 items-center -p-1 rounded-md"
+                  className="flex flex-row flex-wrap md:flex-nowrap gap-1 items-center -p-1 rounded-md w-full"
                 >
                   <input
                     id={`carmodel-${idx}`}
                     name={`carmodel-${idx}`}
                     type="text"
                     placeholder="Toyota Avanza"
-                    className="block w-[150px] rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
+                    className="grow-0 w-[150px] rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
                     value={car.carModel}
                     required
                     onChange={(e) =>
@@ -211,7 +211,7 @@ function BookForms() {
                     name={`year-${idx}`}
                     type="text"
                     placeholder="2022"
-                    className="block w-[80px] rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
+                    className="grow-0 w-[80px] rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
                     value={car.year}
                     required
                     onChange={(e) =>
@@ -223,7 +223,7 @@ function BookForms() {
                     name={`location-${idx}`}
                     type="text"
                     placeholder="Cawang, Jakarta Timur"
-                    className="block w-[200px] rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
+                    className="grow min-w-[200px] rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
                     value={car.location}
                     required
                     onChange={(e) =>
@@ -245,16 +245,16 @@ function BookForms() {
             ))}
             <button
               type="button"
-              className="mt-2 w-fit bg-blue-100 hover:bg-blue-200 text-blue-700 font-semibold py-1 px-4 rounded-lg border border-blue-300 shadow-sm transition"
+              className="flex flex-grow-0 mt-2 w-fit bg-blue-100 hover:bg-blue-200 text-blue-700 font-semibold py-1 px-4 rounded-lg border border-blue-300 shadow-sm transition"
               onClick={handleAddCar}
             >
               + Tambah Mobil
             </button>
           </div>
-          <div className="flex flex-col gap-1">
-            <label className="text-sm font-semibold text-gray-800 text-left">
-              Tanggal & Waktu Inspeksi
-            </label>
+          <label className="text-sm font-semibold text-gray-800 text-left">
+            Tanggal & Waktu Inspeksi
+          </label>
+          <div className="flex flex-row gap-1">
             <div className="flex flex-col md:flex-row gap-3">
               <input
                 id="inspection-date"
@@ -367,6 +367,14 @@ function Pricing() {
 
 function Testimonials() {
   let featurableWidgetId = "0e31b189-2b21-4b21-90c2-75f0e27da0d3";
+
+  let nMap = 0;
+
+  const checkMapLength = (lenmap: number) => {
+    console.log("number of reviews:", lenmap);
+    return <></>;
+  };
+
   return (
     <section
       id="Testimonials"
@@ -378,13 +386,35 @@ function Testimonials() {
       <p className="text-base md:text-lg text-blue-900 max-w-2xl whitespace-pre-line">
         {Strings.SECTION_4_DESC}
       </p>
-      <div className="flex justify-center items-center w-full max-w-2xl mx-auto overflow-hidden rounded-lg border bg-white shadow">
+      {/* Testimonials Google Review */}
+      <div className="flex justify-center items-center w-full max-w-2xl mx-auto overflow-hidden rounded-lg border bg-white shadow p-1">
         <ReactGoogleReviews
-          layout="carousel"
+          layout="custom"
           featurableId={featurableWidgetId}
-          maxItems={1}
+          renderer={(reviews) => {
+            return (
+              <div className="flex flex-row w-full bg-gradient-to-tr from-blue-200 via-teal-300 to-teal-400 rounded-lg item-center justify-center content-center">
+                {reviews.map(({ reviewId, reviewer, comment }) => (
+                  <div className="flex" key={reviewId}>
+                    <div>
+                      <img className="" src={reviewer.profilePhotoUrl}></img>
+                    </div>
+                    <h3 className="text-lg font-semibold text-start text-gray-900">
+                      {reviewer.displayName}
+                    </h3>
+                    <p className="text-base w-[300px] bg-white text-gray-800 tracking-normal text-start justify-normal items-start">
+                      {comment}
+                    </p>
+                    {nMap++}
+                  </div>
+                ))}
+                {checkMapLength(nMap)}
+              </div>
+            );
+          }}
         />
       </div>
+      {/* Testimonials Google Review */}
     </section>
   );
 }
