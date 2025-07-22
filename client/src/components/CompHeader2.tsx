@@ -1,90 +1,99 @@
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { pageRouteInfo, GetMenuPageString } from "../App";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoClose } from "react-icons/io5";
 
 interface header2Props {
   headerClick: (id: number) => void;
 }
 
 const CompHeader2: React.FC<header2Props> = ({ headerClick }) => {
-  const menu = [
-    { id: 1, name: "Home" },
-    { id: 2, name: "Blogs" },
-    { id: 3, name: "Contacts" },
-  ];
+  const menu = GetMenuPageString();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const [ActiveMenu, setActiveMenu] = useState(1);
+  const activeRoute = location.pathname;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const handleClick = (menuid: number) => {
-    setActiveMenu(menuid);
-    headerClick(menuid);
-    setMobileMenuOpen(false);
-  };
+  const toggleMobileMenu = () => setMobileMenuOpen((prev) => !prev);
 
   return (
-    <div
-      className="flex items-center fixed w-full justify-between border-b-[1px] bg-white z-50 shadow-md"
+    <header
+      className="fixed top-0 left-0 right-0 z-50 bg-white border-b shadow-md"
       style={{ borderColor: "#0a2540" }}
     >
-      {/* Logo */}
-      <div className="w-[200px] h-[90px] flex items-center justify-center bg-white">
-        <img src="/name+logo.png" className="p-7" alt="Logo" />
-      </div>
-      {/* Desktop Menu */}
-      <div className="hidden md:flex gap-14 pr-[20px]">
-        {menu.map((item) => (
-          <div
-            key={item.id}
-            className={`relative cursor-pointer font-semibold text-[#0a2540] hover:text-teal-700 transition-colors duration-200 ${
-              ActiveMenu === item.id
-                ? "underline decoration-blue-100 decoration-4"
-                : ""
-            }`}
-            onClick={() => handleClick(item.id)}
-          >
-            <h2 className="flex items-center text-lg">{item.name}</h2>
-          </div>
-        ))}
-      </div>
-      {/* Mobile Hamburger Icon */}
-      <div className="md:hidden flex items-center">
-        <button
-          className="p-2 rounded focus:outline-none focus:ring-2 focus:ring-teal-400"
-          onClick={() => setMobileMenuOpen((open) => !open)}
-          aria-label="Open menu"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="#0a2540"
-            className="w-8 h-8"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"
-            />
-          </svg>
-        </button>
-      </div>
-      {/* Mobile Dropdown Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden absolute top-[90px] left-0 w-full bg-white shadow-lg z-50 flex flex-col items-center py-4 animate-fade-in border-t border-[#0a2540]">
+      <div className="max-w-screen-xl h-[90px] mx-auto flex items-center justify-between px-4 py-4 md:py-0">
+        {/* Logo */}
+        <div className="w-36 flex items-center">
+          <img
+            src="/name+logo.png"
+            alt="Logo"
+            className="h-full object-contain"
+            style={{ mixBlendMode: "multiply" }}
+          />
+        </div>
+
+        {/* Desktop Menu */}
+        <nav className="hidden md:flex gap-10">
           {menu.map((item) => (
             <div
-              key={item.id}
-              className={`w-full text-center py-3 cursor-pointer font-semibold text-[#0a2540] hover:text-teal-500 transition-colors duration-200 ${
-                ActiveMenu === item.id ? "bg-teal-50" : ""
+              key={item.pageRoute}
+              className={`cursor-pointer font-semibold text-[#0a2540] hover:text-teal-700 transition-colors duration-200 ${
+                activeRoute === pageRouteInfo[item.pageRoute].route
+                  ? "underline decoration-blue-100 decoration-4"
+                  : ""
               }`}
-              onClick={() => handleClick(item.id)}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                navigate(pageRouteInfo[item.pageRoute].route);
+              }}
             >
-              {item.name}
+              {item.label}
             </div>
           ))}
-        </div>
-      )}
-    </div>
+        </nav>
+
+        {/* Hamburger Icon */}
+        <button
+          className="md:hidden p-2 rounded focus:outline-none bg-white shadow-md focus:ring-2 focus:ring-teal-400 transition-transform duration-300"
+          onClick={toggleMobileMenu}
+          aria-label="Toggle menu"
+        >
+          {mobileMenuOpen ? (
+            <IoClose className="w-8 h-8 text-teal-700" />
+          ) : (
+            <GiHamburgerMenu className="w-8 h-8 text-teal-700" />
+          )}
+        </button>
+      </div>
+
+      {/* Mobile Dropdown Menu */}
+      <div
+        className={`md:hidden bg-white border-t border-[#0a2540] shadow-md transition-all duration-300 ease-in-out overflow-hidden ${
+          mobileMenuOpen ? "max-h-[500px] py-4" : "max-h-0 py-0"
+        }`}
+      >
+        <nav className="flex flex-col items-center space-y-3">
+          {menu.map((item) => (
+            <div
+              key={item.pageRoute}
+              className={`w-full text-center py-2 cursor-pointer font-semibold text-[#0a2540] hover:text-teal-500 transition-colors duration-200 ${
+                activeRoute === pageRouteInfo[item.pageRoute].route
+                  ? "bg-teal-50"
+                  : ""
+              }`}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                navigate(pageRouteInfo[item.pageRoute].route);
+              }}
+            >
+              {item.label}
+            </div>
+          ))}
+        </nav>
+      </div>
+    </header>
   );
 };
 

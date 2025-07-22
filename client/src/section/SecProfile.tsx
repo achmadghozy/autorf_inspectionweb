@@ -14,6 +14,11 @@ import {
   FaWrench,
   FaCarSide,
   FaStamp,
+  FaTiktok,
+  FaInstagram,
+  FaFacebook,
+  FaArrowRight,
+  FaGoogle,
 } from "react-icons/fa";
 import CompTextPoint from "../components/CompTextPoint";
 import CompCarThumbnail from "../components/CompCarThumbnail";
@@ -21,27 +26,61 @@ import brio from "/pngwing_brio.png";
 import rush from "/pngwing_rush.png";
 import alphard from "/pngwing_alphard.png";
 import React, { useState } from "react";
+import LogoComplete from "/logocomplete.png";
+import CompPicCollage from "../components/CompPicCollage";
+import CompGoogleReviewsWrapper from "../components/CompGoogleReviewsWrapper";
 
 interface ProfileIF {}
 
 function Introduction() {
+  // Smooth scroll handler
+  const handleBookingScroll = () => {
+    const bookingSection = document.getElementById("Booking");
+    if (bookingSection) {
+      bookingSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section
       id="Intro"
-      className="min-h-[80vh] flex flex-col justify-center items-center from-white to-blue-700 py-20 px-4 text-center"
+      className="min-h-[80vh] h-screen flex flex-col justify-center items-center pt-5 pb-5 px-4 text-center bg-gradient-to-br from-blue-100 via-teal-100 to-blue-300"
     >
-      <h2 className="text-4xl md:text-5xl font-bold mb-4 text-teal-700 drop-shadow">
-        {Strings.ABOUT_HEADING}
-      </h2>
-      <h2 className="text-2xl md:text-3xl font-semibold mb-3 text-teal-600 bg-white opacity-80 rounded-lg p-4">
-        {Strings.ABOUT_HEADING_SUB}
-      </h2>
-      <p className="text-lg md:text-xl text-blue-800 max-w-2xl">
-        {Strings.ABOUT_DESC}
-      </p>
-      <p className="text-lg md:text-xl text-blue-700 max-w-2xl">
-        {Strings.ABOUT_DESC_SUB}
-      </p>
+      <div className="w-full p-0 md:p-8 flex flex-col md:flex-row items-center gap-0 md:gap-8">
+        {/* Left: Text Content */}
+        <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left gap-0 p-8">
+          {/*
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-2 text-teal-700 drop-shadow-sm tracking-wide px-4 py-2 border-b-4 border-cyan-200">
+            {Strings.ABOUT_HEADING}
+          </h2>
+          */}
+          <h2 className="text-2xl md:text-4xl font-extrabold mb-0 text-teal-600 tracking-wider px-4 pt-2 pb-1 border-b-4 border-teal-0">
+            {Strings.ABOUT_HEADING_SUB}
+          </h2>
+          <p className="text-base md:text-lg text-blue-800 max-w-2xl font-medium mb-1 px-4 pb-2 mt-0 align-top ">
+            {Strings.ABOUT_DESC}
+          </p>
+          <p className="text-xl md:text-xl text-blue-700 max-w-2xl font-semibold px-4 py-2 mt-4">
+            {Strings.ABOUT_DESC_SUB}
+          </p>
+          {/* Booking Button */}
+          <button
+            onClick={handleBookingScroll}
+            className="mt-0 ml-4 flex items-center gap-4 px-6 py-3 bg-gradient-to-r from-teal-500 to-blue-500 text-white font-bold text-lg rounded-xl shadow-lg hover:from-teal-600 hover:to-blue-600 transition group"
+          >
+            <span className="border-r-2 border-white pr-4 text-start justify-start align-middle">
+              Booking inspeksi bersama kami
+            </span>
+            <span className="pl-4 flex items-center">
+              <FaArrowRight className="text-2xl group-hover:translate-x-1 transition-transform" />
+            </span>
+          </button>
+        </div>
+        {/* Right: Image Display */}
+        <div className="hidden md:flex flex-1 items-center content-center justify-center min-h-[220px] w-full md:w-auto bg-gradient-to-br from-teal-200 via-blue-100 to-white rounded-3xl md:rounded-r-3xl md:rounded-l-none p-8">
+          <CompPicCollage />
+        </div>
+      </div>
     </section>
   );
 }
@@ -71,13 +110,13 @@ function Services() {
   return (
     <section
       id="Services"
-      className="min-h-[60vh] flex flex-col justify-center items-center bg-teal-100 py-20 px-4 border-b border-blue-100 text-center"
+      className="min-h-[60vh] flex flex-col justify-center items-center bg-gradient-to-bl from-blue-300 via-teal-100 to-teal-200 py-10 px-4 border-b border-blue-100 text-center"
     >
-      <h3 className="text-2xl md:text-3xl font-semibold mb-3 text-teal-800 bg-white opacity-80 rounded-lg p-4">
+      <h3 className="text-2xl md:text-4xl font-semibold md:font-bold mb-3 text-teal-800 md:tracking-wide p-4">
         {Strings.SECTION_1_HEADING}
       </h3>
 
-      <div className="w-full max-w-3xl mx-auto mt-8 p-6 rounded-2xl border border-blue-200 bg-white/60 backdrop-blur-sm shadow flex flex-wrap justify-center gap-4">
+      <div className="w-full max-w-3xl mx-auto mt-3 p-6 rounded-2xl border border-blue-200 bg-white/60 backdrop-blur-sm shadow flex flex-wrap justify-center gap-4">
         {points.map((point, idx) => {
           const Icon = icons[idx] || FaCarAlt;
           return (
@@ -125,7 +164,7 @@ function BookForms() {
       )
       .join("\n\n");
     const message =
-      `Halo, saya ingin booking inspeksi mobil.\n` +
+      `Halo tim AutoRF, saya ingin booking inspeksi mobil.\n` +
       `Nama: ${username}\n` +
       `${carsMsg}\n` +
       `Tanggal: ${inspectionDate}\n` +
@@ -138,14 +177,14 @@ function BookForms() {
 
   return (
     <section
-      id="Advertisment"
-      className="min-h-[60vh] flex flex-col justify-center items-center bg-blue-50 py-20 px-4 border-b border-blue-100 text-center"
+      id="Booking"
+      className="min-h-[60vh] flex flex-col justify-center items-center bg-gradient-to-br from-teal-200 via-teal-50 to-blue-50 py-20 px-4 border-b border-blue-100 text-center"
     >
-      <h3 className="text-2xl md:text-3xl font-semibold mb-3 text-teal-700 bg-white opacity-80 rounded-lg p-4">
+      <h3 className="text-2xl md:text-3xl font-extrabold tracking-wide mb-3 text-teal-700 p-4">
         {Strings.SECTION_5_HEADING}
       </h3>
       <form
-        className="w-full max-w-[600px] mx-auto mt-8 p-5 rounded-3xl border border-blue-200 bg-white/80 backdrop-blur-md shadow-xl flex flex-col items-stretch gap-6"
+        className="w-full max-w-[600px] mx-auto mt-2 p-5 rounded-3xl border border-blue-200 bg-white/80 backdrop-blur-md shadow-xl flex flex-col items-stretch gap-6"
         onSubmit={handleBookNow}
       >
         {/* Forms */}
@@ -303,9 +342,6 @@ function BookForms() {
           Booking Sekarang
         </button>
       </form>
-      <p className="text-base md:text-lg font-light text-blue-900 max-w-2xl whitespace-pre-line bg-white opacity-80 rounded-lg p-4 mt-4">
-        {Strings.SECTION_5_DESC}
-      </p>
     </section>
   );
 }
@@ -314,9 +350,9 @@ function Pricing() {
   return (
     <section
       id="Pricing"
-      className="min-h-[60vh] flex flex-col justify-center items-center bg-white/30 py-20 px-4 border-b border-blue-100 text-center"
+      className="min-h-[60vh] flex flex-col justify-center items-center bg-gradient-to-bl from-blue-100 via-teal-100 to-teal-200 py-5 px-4 text-center"
     >
-      <h3 className="text-2xl md:text-3xl font-semibold mb-3 text-blue-900 bg-white opacity-80 rounded-lg p-4">
+      <h3 className="text-2xl md:text-3xl font-extrabold mb-3 tracking-wide text-blue-900 p-4">
         {Strings.SECTION_3_HEADING}
       </h3>
       <div className="flex flex-row justify-evenly mb-4 mt-4 gap-2">
@@ -328,6 +364,8 @@ function Pricing() {
           text4={Strings.SMALL_CAR_3}
           text5={"dll"}
           harga={"Rp. 350.000"}
+          color1={"from-blue-100 via-blue-100 to-sky-200"}
+          color2={"from-blue-50 via-sky-100 to-sky-100"}
         />
         <CompCarThumbnail
           image={rush}
@@ -337,6 +375,8 @@ function Pricing() {
           text4={Strings.MEDIUM_CAR_3}
           text5={"dll"}
           harga={"Rp. 400.000"}
+          color1={"from-blue-100 via-blue-200 to-sky-300"}
+          color2={"from-blue-200 via-sky-200 to-sky-200"}
         />
         <CompCarThumbnail
           image={alphard}
@@ -346,6 +386,8 @@ function Pricing() {
           text4={Strings.PREMIUM_CAR_3}
           text5={"dll"}
           harga={"Rp. 500.000"}
+          color1={"from-sky-200 via-sky-300 to-teal-300"}
+          color2={"from-blue-200 via-sky-300 to-sky-300"}
         />
       </div>
       <div className="flex justify-center pt-5">
@@ -366,19 +408,10 @@ function Pricing() {
 }
 
 function Testimonials() {
-  let featurableWidgetId = "0e31b189-2b21-4b21-90c2-75f0e27da0d3";
-
-  let nMap = 0;
-
-  const checkMapLength = (lenmap: number) => {
-    console.log("number of reviews:", lenmap);
-    return <></>;
-  };
-
   return (
     <section
       id="Testimonials"
-      className="min-h-[40vh] flex flex-col justify-center items-center bg-blue-50 py-20 px-4 border-b border-blue-100 text-center"
+      className="min-h-[40vh] flex flex-col justify-center items-center bg-gradient-to-br from-blue-100 via-teal-100 to-blue-200 py-20 px-4 border-b border-blue-100 text-center"
     >
       <h3 className="text-2xl md:text-3xl font-semibold mb-3 text-teal-800">
         {Strings.SECTION_4_HEADING}
@@ -386,7 +419,19 @@ function Testimonials() {
       <p className="text-base md:text-lg text-blue-900 max-w-2xl whitespace-pre-line">
         {Strings.SECTION_4_DESC}
       </p>
+      <div className="relative block md:w-[700px] md:h-[500px] bg-gradient-to-br from-sky-200 via-teal-100 to-blue-100 item-center justify-center rounded-2xl pt-10 mt-5 shadow-lg">
+        <CompGoogleReviewsWrapper />
+        <div className="absolute flex-col bottom-2 right-2 bg-white m-2 p-2 shadow-md rounded-md">
+          <span className="text-base text-blue-900 font-medium bg-white text-start justify-start">
+            Temukan kami di Google
+          </span>
+          <span>
+            <FaGoogle className="flex w-15 h-15 text-[#f45142] " />
+          </span>
+        </div>
+      </div>
       {/* Testimonials Google Review */}
+      {/* 
       <div className="flex justify-center items-center w-full max-w-2xl mx-auto overflow-hidden rounded-lg border bg-white shadow p-1">
         <ReactGoogleReviews
           layout="custom"
@@ -414,6 +459,15 @@ function Testimonials() {
           }}
         />
       </div>
+      */}
+      {/* 
+      <div className="flex bg-white bg-opacity-90 border border-teal-400">
+        <ReactGoogleReviews
+          layout="carousel"
+          featurableId={featurableWidgetId}
+        />
+      </div>
+      */}
       {/* Testimonials Google Review */}
     </section>
   );
@@ -453,7 +507,7 @@ function OrderProcess() {
   return (
     <section
       id="OrderProcess"
-      className="min-h-[40vh] flex flex-col justify-center items-center bg-blue-100 py-20 px-4 text-center"
+      className="min-h-[40vh] flex flex-col justify-center items-center bg-gradient-to-br from-teal-200 via-teal-100 to-blue-100 py-20 px-4 text-center"
     >
       <h3 className="text-2xl md:text-3xl font-semibold mb-3 text-teal-700">
         {Strings.SECTION_ORDER_PROCESS_HEADING}
@@ -484,20 +538,57 @@ function Contact() {
   return (
     <section
       id="Contact"
-      className="min-h-[40vh] flex flex-col justify-center items-center bg-white py-20 px-4 text-center"
+      className="min-h-[40vh] flex flex-col justify-center items-center py-20 px-4 text-center bg-gradient-to-br from-blue-100 via-teal-100 to-blue-300"
     >
-      <h3 className="text-2xl md:text-3xl font-semibold mb-3 text-teal-700">
-        {Strings.SECTION_5_HEADING}
-      </h3>
-      <p className="text-base md:text-lg text-blue-900 max-w-2xl mb-6 whitespace-pre-line">
-        {Strings.SECTION_5_DESC}
-      </p>
-      <a
-        href="https://wa.me/6282219929908"
-        className="inline-block bg-teal-600 text-white px-8 py-3 rounded-lg shadow hover:bg-blue-800 transition"
-      >
-        Pesan Sekarang
-      </a>
+      <div className="w-full max-w-lg mx-auto bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center gap-6 border border-blue-200">
+        {/* Logo */}
+        <img
+          src={LogoComplete}
+          alt="AutoRF Logo"
+          className="w-full h-24 mb-2 "
+        />
+        <h3 className="text-2xl md:text-3xl font-semibold mb-2 text-teal-700">
+          Hubungi Kami
+        </h3>
+        <div className="flex flex-col md:flex-row gap-4 items-center justify-center w-full">
+          {/* TikTok */}
+          <a
+            href="https://www.tiktok.com/@autorf.id"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-base text-gray-800 hover:text-teal-600 transition"
+          >
+            <FaTiktok className="text-2xl" />
+            <span>@autorf.id</span>
+          </a>
+          {/* Instagram */}
+          <a
+            href="https://www.instagram.com/autorf.id/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-base text-gray-800 hover:text-teal-600 transition"
+          >
+            <FaInstagram className="text-2xl" />
+            <span>@autorf.id</span>
+          </a>
+          {/* Facebook */}
+          <a
+            href="https://www.facebook.com/autorf.id/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-base text-gray-800 hover:text-teal-600 transition"
+          >
+            <FaFacebook className="text-2xl" />
+            <span>AutoRF Indonesia</span>
+          </a>
+        </div>
+        <a
+          href="/aboutus"
+          className="mt-4 text-teal-700 hover:underline text-base font-semibold"
+        >
+          Tentang Kami
+        </a>
+      </div>
     </section>
   );
 }

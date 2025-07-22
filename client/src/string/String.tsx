@@ -6,7 +6,7 @@ export default {
     "JASA INSPEKSI MOBIL BEKAS INDEPENDENT, PALING CEPAT DAN AKURAT",
   ABOUT_DESC:
     "PANTAU INSPEKSI SECARA REALTIME DAN KETAHUI HASILNYA KURANG DARI 30MENIT",
-  ABOUT_DESC_SUB: "AREA JABODETABEK I MALANG",
+  ABOUT_DESC_SUB: "AREA JABODETABEK & MALANG",
 
   SECTION_1_HEADING: "Kami Melakukan Inspeksi Menyeluruh Dan Profesional",
   SECTION_1_DESC: "",
@@ -55,4 +55,24 @@ export default {
   PREMIUM_CAR_1: "Alphard",
   PREMIUM_CAR_2: "Fortuner",
   PREMIUM_CAR_3: "Palisade",
+
+  DETAIL_INSPECTION_TITLE_1: "Pemeriksaan Eksterior",
+  DETAIL_INSPECTION_TITLE_2: "Pemeriksaan Interior",
+  DETAIL_INSPECTION_TITLE_3: "Pemeriksaan Rangka dan Kaki-Kaki",
+  DETAIL_INSPECTION_TITLE_4: "Pemeriksaan Mesin dan Kelistrikan",
+  DETAIL_INSPECTION_TITLE_5: "Verifikasi Dokumen",
+  DETAIL_INSPECTION_TITLE_6: "Penyusunan Laporan dan Konsultasi",
+
+  DETAIL_INSPECTION_DESC_1:
+    "Pemeriksaan eksterior dilakukan secara teliti oleh inspector. Setiap bagian bodi mobil diperiksa untuk memastikan cat masih orisinal, tidak ada goresan, penyok, atau bekas perbaikan. Celah antar panel, lampu, spion, dan kaca dicek sesuai standar menggunakan alat pengukur ketebalan cat untuk mendeteksi perbaikan tersembunyi",
+  DETAIL_INSPECTION_DESC_2:
+    "Interior diperiksa menyeluruh: jok, dashboard, plafon, dan panel pintu dicek untuk kerusakan atau noda berlebih. Semua fitur kelistrikan seperti AC, audio, power window, dan lampu kabin diuji. Inspector juga mendeteksi aroma kabin untuk indikasi bekas banjir demi kenyamanan dan keamanan",
+  DETAIL_INSPECTION_DESC_3:
+    "Rangka mobil dan sistem kaki-kaki (suspensi, lengan ayun, ball joint) diperiksa untuk memastikan tidak ada kerusakan struktural, keausan berlebih, atau perubahan sudut akibat benturan. Penting untuk menjaga keamanan, stabilitas, dan kenyamanan berkendara",
+  DETAIL_INSPECTION_DESC_4:
+    "Mesin dinyalakan untuk memeriksa suara, getaran, dan respons. Inspector memantau suara aneh, asap knalpot, dan memastikan mesin bekerja tanpa gejala overheat. Aki, alternator, pendingin, dan pemindaian OBD juga dilakukan untuk mendeteksi error elektronik",
+  DETAIL_INSPECTION_DESC_5:
+    "Tim inspeksi mencocokkan nomor rangka dan mesin dengan STNK dan BPKB untuk memastikan tidak ada pemalsuan atau penggantian komponen tanpa izin",
+  DETAIL_INSPECTION_DESC_6:
+    "Hasil inspeksi dirangkum ke dalam laporan lengkap disertai foto. Anda menerima laporan dalam satu jam. Senior Inspector akan menghubungi untuk konsultasi, menjawab pertanyaan, dan memberikan rekomendasi profesional agar Anda dapat memutuskan dengan percaya diri",
 };
