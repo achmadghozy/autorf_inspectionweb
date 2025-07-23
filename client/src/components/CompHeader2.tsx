@@ -21,7 +21,7 @@ const CompHeader2: React.FC<header2Props> = ({ headerClick }) => {
   return (
     <header
       className="fixed top-0 left-0 right-0 z-50 bg-white border-b shadow-md"
-      style={{ borderColor: "#0a2540" }}
+      style={{ borderBottom: "2px solid #164e63" }} // teal-800 for a softer blend
     >
       <div className="max-w-screen-xl h-[90px] mx-auto flex items-center justify-between px-4 py-4 md:py-0">
         {/* Logo */}

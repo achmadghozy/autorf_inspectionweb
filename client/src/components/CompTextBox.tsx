@@ -18,7 +18,7 @@ const CompTextBox: React.FC<CompTextBoxProps> = ({
 }) => {
   return (
     <div
-      className={`relative flex flex-col gap-3 rounded-2xl border border-blue-100 shadow-lg pt-3 pl-3 ${color} min-h-[180px] items-center w-[150px] md:w-[220px] mx-1 md:mx-auto`}
+      className={`relative flex flex-col gap-3 rounded-2xl border border-blue-100 shadow-lg pt-3 pl-3 ${color} min-h-[180px] content-center items-center w-[150px] md:w-[220px] mx-1 md:mx-auto`}
     >
       {/* Icon/Image Overlay */}
       {(image || Icon) && (
@@ -34,23 +34,27 @@ const CompTextBox: React.FC<CompTextBoxProps> = ({
         </div>
       )}
       {/* Text Content */}
-      <div className="flex flex-col gap-1 w-full justify-start text-start align-middle items-start mt-1 mb-2 md:mt-4 content-start">
-        <span className="text-blue-900 text-base md:text-2xl font-extrabold tracking-tight md:z-10 text-start justify-start">
+      <div className="flex flex-col gap-1 w-full justify-start text-start align-middle items-start content-center mt-1 mb-2 md:mt-4">
+        <span className="text-blue-900 text-base md:text-2xl font-extrabold tracking-tight md:z-10 text-start justify-center align-middle">
           {text1}
         </span>
         {/* Only show text2 and text3 on md and up */}
-        <div className="flex flex-col gap-1 w-full text-start justify-start">
-          {text2 && (
-            <span className="text-blue-700 text-base md:text-md font-light z-10 text-start justify-start tracking-tight md:tracking-normal opacity-80 w-full">
-              {text2}
-            </span>
-          )}
-          {text3 && (
-            <span className="text-blue-600 text-base md:text-md font-light z-10 text-start tracking-tight md:tracking-normal justify-start opacity-80 w-full">
-              {text3}
-            </span>
-          )}
-        </div>
+        {(text2 || text3) != null ? (
+          <div className="flex flex-col gap-1 w-full text-start justify-start">
+            {text2 && (
+              <span className="text-blue-700 text-base md:text-md font-light z-10 text-start justify-start tracking-tight md:tracking-normal opacity-80 w-full">
+                {text2}
+              </span>
+            )}
+            {text3 && (
+              <span className="text-blue-600 text-base md:text-md font-light z-10 text-start tracking-tight md:tracking-normal justify-start opacity-80 w-full">
+                {text3}
+              </span>
+            )}
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

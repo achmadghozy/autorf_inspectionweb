@@ -55,15 +55,15 @@ function SecInspection() {
             className="flex flex-col md:flex-row items-center rounded-xl shadow-md p-4 m-2 border border-teal-100 text-left gap-4"
           >
             <div className="flex flex-row items-center w-full mb-2">
-              <div className="hidden md:flex-none w-24 h-24 md:w-56 md:h-56 bg-blue-100 mb-3 items-center justify-center">
+              <div className="hidden md:flex-none h-24 max-w-36 bg-blue-100 mx-2 items-center justify-center align-middle">
                 <img
                   src={point.img}
                   alt={strings[point.title]}
                   className="object-cover w-full h-full rounded-lg"
                 />
               </div>
-              <div className="flex flex-col items-start justify-start align-middle mx=2 px-2">
-                <h4 className="text-lg font-bold text-teal-700 mb-2 text-start md:text-left">
+              <div className="flex flex-col items-start justify-start align-middle mx-2 px-2">
+                <h4 className="text-lg font-bold text-teal-700 mb-1 text-start md:text-left">
                   {point.title}
                 </h4>
                 <p className="text-sm text-blue-900 w-full md:w-auto md:flex-1">

@@ -4,6 +4,7 @@ import "react-google-reviews/dist/index.css";
 import CompTextBox from "../components/CompTextBox";
 import {
   FaWhatsappSquare,
+  FaWhatsapp,
   FaCalendarCheck,
   FaCarAlt,
   FaFileAlt,
@@ -203,7 +204,7 @@ function BookForms() {
               id="username"
               name="username"
               type="text"
-              placeholder="Prabowo Subianto"
+              placeholder=""
               className="block w-[200px] rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
               value={username}
               required
@@ -215,14 +216,14 @@ function BookForms() {
               Detail Inspeksi:
             </label>
             {/* Header row for car inputs */}
-            <div className="hidden md:flex flex-row gap-3 items-center mb-1 pl-1">
+            <div className="hidden md:flex flex-row gap-1 items-center mb-1 pl-1">
               <span className="text-xs font-semibold text-gray-600 w-[150px] text-left">
                 Nama Mobil
               </span>
               <span className="text-xs font-semibold text-gray-600 w-[80px] text-left">
                 Tahun Mobil
               </span>
-              <span className="text-xs font-semibold text-gray-600 w-[200px] text-left">
+              <span className="text-xs font-semibold text-gray-600 w-[200px] mr-1 text-left">
                 Alamat Mobil
               </span>
               <span className="w-8"></span> {/* Spacer for remove button */}
@@ -299,7 +300,11 @@ function BookForms() {
                 id="inspection-date"
                 name="inspection-date"
                 type="date"
-                className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
+                className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition
+                  [&::-webkit-calendar-picker-indicator]:bg-teal-500
+                  [&::-webkit-calendar-picker-indicator]:rounded-full
+                  [&::-webkit-calendar-picker-indicator]:p-1
+                  [&::-webkit-calendar-picker-indicator]:hover:bg-teal-400"
                 placeholder="Pilih tanggal"
                 value={inspectionDate}
                 required
@@ -309,7 +314,11 @@ function BookForms() {
                 id="inspection-time"
                 name="inspection-time"
                 type="time"
-                className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition"
+                className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-400 shadow-sm transition
+                  [&::-webkit-calendar-picker-indicator]:bg-teal-500
+                  [&::-webkit-calendar-picker-indicator]:rounded-full
+                  [&::-webkit-calendar-picker-indicator]:p-1
+                  [&::-webkit-calendar-picker-indicator]:hover:bg-teal-400"
                 placeholder="Pilih waktu"
                 value={inspectionTime}
                 required
@@ -337,9 +346,14 @@ function BookForms() {
         </div>
         <button
           type="submit"
-          className="mt-4 w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 rounded-xl shadow-lg transition text-lg tracking-wide"
+          className="flex mt-4 w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 rounded-xl shadow-lg transition text-lg tracking-wide justify-center"
         >
-          Booking Sekarang
+          <span className="text-start justify-start align-middle">
+            Booking Sekarang
+          </span>
+          <span className="pt-0.5 ml-2 justify-center items-center align-middle">
+            <FaWhatsapp className="text-2xl group-hover:translate-x-1 transition-transform" />
+          </span>
         </button>
       </form>
     </section>
@@ -419,14 +433,16 @@ function Testimonials() {
       <p className="text-base md:text-lg text-blue-900 max-w-2xl whitespace-pre-line">
         {Strings.SECTION_4_DESC}
       </p>
-      <div className="relative block md:w-[700px] md:h-[500px] bg-gradient-to-br from-sky-200 via-teal-100 to-blue-100 item-center justify-center rounded-2xl pt-10 mt-5 shadow-lg">
+      <div className="relative block md:w-[700px] md:h-[450px] bg-gradient-to-br from-sky-50 via-teal-50 to-blue-50 item-center justify-center rounded-2xl pt-10 mt-5 shadow-lg">
+        {/* Google logo at top right */}
+        <span className="absolute top-0 right-0 md:top-4 md:right-4 z-10">
+          <FaGoogle className="w-12 h-12 text-[#f45142] bg-white rounded-full shadow-lg p-2" />
+        </span>
         <CompGoogleReviewsWrapper />
-        <div className="absolute flex-col bottom-2 right-2 bg-white m-2 p-2 shadow-md rounded-md">
-          <span className="text-base text-blue-900 font-medium bg-white text-start justify-start">
+        {/* "Temukan kami di Google" at bottom left */}
+        <div className="absolute left-4 bottom-4 flex bg-blue-400 w-auto m-2 p-2 shadow-md rounded-lg items-center">
+          <span className="text-base text-blue-50 font-bold text-start justify-start align-middle p-0.5 m-0.5">
             Temukan kami di Google
-          </span>
-          <span>
-            <FaGoogle className="flex w-15 h-15 text-[#f45142] " />
           </span>
         </div>
       </div>
@@ -540,17 +556,12 @@ function Contact() {
       id="Contact"
       className="min-h-[40vh] flex flex-col justify-center items-center py-20 px-4 text-center bg-gradient-to-br from-blue-100 via-teal-100 to-blue-300"
     >
-      <div className="w-full max-w-lg mx-auto bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center gap-6 border border-blue-200">
-        {/* Logo */}
-        <img
-          src={LogoComplete}
-          alt="AutoRF Logo"
-          className="w-full h-24 mb-2 "
-        />
+      {/* Contact Info Card, more transparent for blending */}
+      <div className="w-full max-w-lg mx-auto rounded-3xl shadow-xl p-8 flex flex-col items-center gap-6 border border-blue-100 bg-white/60 backdrop-blur-md">
         <h3 className="text-2xl md:text-3xl font-semibold mb-2 text-teal-700">
           Hubungi Kami
         </h3>
-        <div className="flex flex-col md:flex-row gap-4 items-center justify-center w-full">
+        <div className="flex flex-col md:flex-row gap-4 items-start justify-start w-full">
           {/* TikTok */}
           <a
             href="https://www.tiktok.com/@autorf.id"
@@ -580,6 +591,37 @@ function Contact() {
           >
             <FaFacebook className="text-2xl" />
             <span>AutoRF Indonesia</span>
+          </a>
+        </div>
+        {/* Location Info */}
+        <div className="flex flex-col items-center gap-1 mt-2">
+          <span className="text-base text-gray-700 font-semibold">Lokasi:</span>
+          <a
+            href="https://goo.gl/maps/2QwQn1k8Qw8Qn1k8A"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-teal-700 hover:underline text-base flex items-center gap-2 font-medium"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="inline-block h-5 w-5 text-teal-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 11.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19.5 10.5c0 5.25-7.5 11-7.5 11s-7.5-5.75-7.5-11a7.5 7.5 0 1115 0z"
+              />
+            </svg>
+            Jl. Raya Bogor KM 21, Jakarta Timur
           </a>
         </div>
         <a

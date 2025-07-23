@@ -97,7 +97,7 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ reviews }) => {
           return (
             <div
               key={review.reviewId || idx}
-              className="absolute z-40 scale-100 bg-white shadow-xl transition-all duration-300"
+              className="absolute z-30 scale-100 bg-white shadow-xl transition-all duration-300"
               style={{
                 left: "50%",
                 transform: "translateX(-50%)",
